@@ -6,23 +6,29 @@ class Launcher {
             stiffness: 0.004,
             length: 10
         }
+        this.bodyA = bodyA;
         this.pointB = pointB
-        this.launch = Constraint.create(options);
-        World.add(world, this.launch);
+        this.launcher = Constraint.create(options);
+        World.add(world, this.launcher);
     }
-
-    display() {
-        if (this.launch.bodyA) {
-            var pointA = this.launch.bodyA.position;
-            //var pointB = this.pointB;
-            strokeWeight(4);
-            line(pointA.x, pointA.y, this.pointB.x, this.pointB.y);
-        }
+    attach(bodyA) {
+        this.launcher.bodyA = bodyA;
     }
 
     fly() {
-        this.launch.bodyA = null;
+        this.launcher.bodyA = null;
 
     }
+
+    display() {
+        if (this.launcher.bodyA) {
+            var pointA = this.bodyA.position;
+            var pointB = this.pointB;
+            strokeWeight(4);
+            line(pointA.x, pointA.y, pointB.x,pointB.y);
+        }
+    }
+
+    
 
 }
